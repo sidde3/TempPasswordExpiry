@@ -1,0 +1,68 @@
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build directories
+dist/
+build/
+target/
+out/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+*.bak
+*.orig
+*.tmp
+*.~lock.*
+
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+.mvn/
+target/
+
+# Gradle
+.gradle/
+build/
+
+# JetBrains
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Miscellaneous
+*.env
+*.lock
+*.bak
+*.tmp
+coverage/
+reports/
+*.sql
+*.sqlite
+*.db
+*.tar.gz
+
+# GitHub workflow files (optional)
+.github/
