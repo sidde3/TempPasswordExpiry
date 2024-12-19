@@ -1,4 +1,4 @@
-package com.example.keycloak;
+package org.demo.keycloak;
 
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.Authenticator;

@@ -1,4 +1,4 @@
-package com.example.keycloak;
+package org.demo.keycloak;
 
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.AuthenticationFlowContext;
@@ -25,13 +25,13 @@ public class TemporaryPasswordExpiryAuthenticator implements Authenticator {
     public void authenticate(AuthenticationFlowContext context) {
         UserModel user = context.getUser();
         int daysToExpirePassword = Optional.ofNullable(user.getFirstAttribute(AppConstraint.PASS_EXP_TEXT)).map(Integer::valueOf).orElse(0);
-        boolean tempPass = user.getRequiredActionsStream().anyMatch("UPDATE_PASSWORD"::equals);
+        boolean tempPass = user.getRequiredActionsStream().anyMatch(AppConstraint.USER_ACTION::equals);
         log.infof("Configured expiry %d, Temp Password enabled %s", daysToExpirePassword, tempPass);
 
         if(tempPass && daysToExpirePassword != 0) {
             PasswordCredentialProvider passwordProvider = (PasswordCredentialProvider) context.getSession().getProvider(CredentialProvider.class, PasswordCredentialProviderFactory.PROVIDER_ID);
             CredentialModel password = passwordProvider.getPassword(context.getRealm(), context.getUser());
-            log.infof("Password creation date %s", password.getCreatedDate());
+            log.debugf("Password creation date %s", password.getCreatedDate());
 
             if (password.getCreatedDate() != null) {
                 long timeElapsed = Time.toMillis(Time.currentTime()) - password.getCreatedDate();
@@ -45,7 +45,6 @@ public class TemporaryPasswordExpiryAuthenticator implements Authenticator {
                 }
             }
         }
-
         // If all checks pass, proceed with success
         context.success();
     }
