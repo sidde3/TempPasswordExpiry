@@ -1,5 +1,6 @@
-package org.demo.keycloak;
+package org.demo.keycloak.passexp;
 
+import org.demo.keycloak.AppConstraint;
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.AuthenticationFlowError;
@@ -38,8 +39,9 @@ public class TemporaryPasswordExpiryAuthenticator implements Authenticator {
                 long timeToExpire = TimeUnit.DAYS.toMillis(daysToExpirePassword);
                 log.debugf("Elapsed time %s, Expired time %s", timeElapsed, timeToExpire);
                 if (timeElapsed > timeToExpire) {
+                    //passwordProvider.deleteCredential(context.getRealm(),user,password.getId());
                     user.setEnabled(false); //disabled user
-                    Response challenge = context.form().addError(new FormMessage(AppConstraint.ERROR_MESSAGE)).createErrorPage(Response.Status.OK);
+                    Response challenge = context.form().addError(new FormMessage(AppConstraint.TEMP_PASS_ERROR_MESSAGE)).createErrorPage(Response.Status.OK);
                     context.failure(AuthenticationFlowError.INVALID_USER,challenge);
                     return;
                 }

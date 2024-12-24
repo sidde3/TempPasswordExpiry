@@ -1,5 +1,6 @@
-package org.demo.keycloak;
+package org.demo.keycloak.passexp;
 
+import org.demo.keycloak.AppConstraint;
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticatorFactory;
@@ -69,6 +70,6 @@ public class TemporaryPasswordExpiryAuthenticationFactory implements Authenticat
 
     @Override
     public String getId() {
-        return AppConstraint.ID;
+        return AppConstraint.TEMP_PASS_ID;
     }
 }

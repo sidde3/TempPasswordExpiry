@@ -1,5 +1,6 @@
-package org.demo.keycloak;
+package org.demo.keycloak.passexp;
 
+import org.demo.keycloak.AppConstraint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.keycloak.authentication.AuthenticationFlowContext;
